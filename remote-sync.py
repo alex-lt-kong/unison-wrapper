@@ -5,6 +5,7 @@ import json
 import logging
 import os
 import subprocess
+import sys
 import time
 
 log_dir = ''
@@ -14,7 +15,7 @@ unison_path = ''
 def load_and_check_settings():
 
   global log_dir, unison_path, profile_dir
-  with open('settings.json', 'r') as f:
+  with open(os.path.join(sys.path[0], 'settings.json'), 'r') as f:
     data = json.load(f)
   unison_path = data['unison_path']
   log_dir = data['log_dir']
@@ -61,8 +62,8 @@ def main(debug: bool, manual: bool, timer: bool, profile: str):
   p = subprocess.Popen(args=unison_cmd)
   stdout, stderr = p.communicate()
   if p.returncode == 0:
-    # the most common scenario is synchronization conflict: Unison will
-    # print the conflict item WITHOUT a \n at the end, so we add one to it.
+    # the most common scenario is a synchronization conflict: Unison will
+    # print conflict items WITHOUT a \n at the end, so we add one to it.
     logging.info(f'Unison exited with {p.returncode=}')
   else:
     print(f'\nUnison exited with {p.returncode=}')
