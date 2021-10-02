@@ -12,7 +12,7 @@ log_dir = ''
 unison_path = ''
 
 
-def load_and_check_settings():
+def load_and_check_settings() -> bool:
 
   global log_dir, unison_path, profile_dir
   with open(os.path.join(sys.path[0], 'settings.json'), 'r') as f:
@@ -22,10 +22,10 @@ def load_and_check_settings():
 
   if os.path.isfile(unison_path) is False:
     print(f'Unison not found at [{unison_path}]')
-    return
+    return False
   if os.path.isdir(log_dir) is False:
     print(f'Log directory [{log_dir}] does not exist')
-    return
+    return False
 
 @click.command()
 @click.option('--debug', is_flag=True, help='Enable debug mode (Unison will print a LOT of information!)')
@@ -39,9 +39,9 @@ def main(debug: bool, manual: bool, timer: bool, profile: str):
       filename=log_path,
       level=logging.DEBUG if debug else logging.INFO,
       format=('%(asctime)s %(levelname)s %(module)s-%(funcName)s: %(message)s'),
-      datefmt='%Y-%m-%d %H:%M:%S',
+      datefmt='%Y%m%d-%H%M%S',
   )
-  logging.info(f'Unison wrapper started')
+  logging.info(f'Unison wrapper for remote synchronization started')
   if debug:
     logging.debug(f'Debug mode enabled')
 
