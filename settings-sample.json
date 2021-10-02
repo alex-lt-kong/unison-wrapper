@@ -1,0 +1,16 @@
+{
+  "log_dir": "/tmp/log",
+  "unison_path": "/usr/bin/unison",
+  "local_sync": {
+    "roots_prefix": ["", "backup/"],
+    "roots": [
+      [".profile", "_profile"], 
+      [".unison/profiles", "_unison_profiles"],
+      ["keys/", "keys/"],
+      ["Desktop/", "desktop/"],  
+      [".ssh/config", "_ssh_config"],
+      [".themes/", "_themes/"],
+      [".icons/", "_icons/"]
+    ]
+  }
+}
