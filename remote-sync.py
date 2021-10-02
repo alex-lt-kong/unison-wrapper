@@ -34,7 +34,7 @@ def load_and_check_settings() -> bool:
 @click.option('--profile', required=True, type=str, help='Name of Unison profile in profile_dir EXCLUDING .prf')
 def main(debug: bool, manual: bool, timer: bool, profile: str):
 
-  log_path = os.path.join(log_dir, profile)
+  log_path = os.path.join(log_dir, profile + ".log")
   logging.basicConfig(
       filename=log_path,
       level=logging.DEBUG if debug else logging.INFO,
