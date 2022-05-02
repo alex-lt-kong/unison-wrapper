@@ -64,10 +64,10 @@ def main(debug: bool, manual: bool, timer: bool, profile: str):
   if p.returncode == 0:
     # the most common scenario is a synchronization conflict: Unison will
     # print conflict items WITHOUT a \n at the end, so we add one to it.
-    logging.info(f'Unison exited with {p.returncode=}')
+    logging.info(f'Unison exited with {p.returncode}')
   else:
-    print(f'\nUnison exited with {p.returncode=}')
-    logging.error(f'Unison exited with {p.returncode=}')
+    print(f'\nUnison exited with {p.returncode}')
+    logging.error(f'Unison exited with {p.returncode}')
   if timer:
     print(f'Elapsed time: {(time.time() - start) / 60:,.1f} minutes')
   
